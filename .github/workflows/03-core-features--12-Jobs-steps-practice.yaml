@@ -1,0 +1,33 @@
+name: Job Steps Pratice
+
+on: workflow_dispatch
+
+jobs:
+  job-1:
+    runs-on: ubuntu-24.04
+    steps:
+     - run: echo "A job has"
+     - run: echo "One or more steps "
+     - run: echo "Which has to be run in sequence"
+
+  job-2: 
+   runs-on: ubuntu-24.04
+   steps:
+     - run: echo "This will run in paraller to job 1"
+
+  job-3:
+   runs-on: ubuntu-24.04
+   needs:
+    - job-1
+    - job-2
+   steps:
+    - run: echo "This runs after job1"
+    - run: echo "and job2 are finished"
+
+  job-4:
+   runs-on: ubuntu-24.04
+   needs:
+    - job-2
+    - job-3
+   steps:
+    - run: echo "to form a DAG"
