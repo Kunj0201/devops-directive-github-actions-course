@@ -1,0 +1,40 @@
+name: Artifacts practice
+
+on: workflow_dispatch
+
+jobs:
+  artifact-producer:
+    name: Produce artifact
+    runs-on: ubuntu-24.04
+    steps:
+     - name: create artifact
+       run: |
+          echo "This will be stored in the Artifact" >> artifact.txt
+          echo " It was made today by the author $(date)" >> artifact.txt
+
+     - name: upload the artifact
+       uses: actions/upload-artifact
+       with:
+        name: artifact-practice
+        path: artifact.txt
+
+
+  artifact-consumer:
+    name: Cosume Artifact
+    runs-on: ubuntu-24.04
+    needs: artifact-producer
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact
+        with:
+          name: artifact-practice
+
+      - name: display artifact
+        run: |
+          cat artifact.txt
+
+          
+
+          
+
+
