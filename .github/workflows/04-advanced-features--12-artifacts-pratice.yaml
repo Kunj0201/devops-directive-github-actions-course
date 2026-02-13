@@ -13,7 +13,7 @@ jobs:
           echo " It was made today by the author $(date)" >> artifact.txt
 
      - name: upload the artifact
-       uses: actions/upload-artifact
+       uses: actions/upload-artifact@v4
        with:
         name: artifact-practice
         path: artifact.txt
@@ -25,7 +25,7 @@ jobs:
     needs: artifact-producer
     steps:
       - name: download artifact
-        uses: actions/download-artifact
+        uses: actions/download-artifact@v4
         with:
           name: artifact-practice
 
@@ -33,7 +33,7 @@ jobs:
         run: |
           cat artifact.txt
 
-          
+
 
           
 
